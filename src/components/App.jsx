@@ -5,20 +5,28 @@ import Section from './Section/Section';
 import Notification from './Notification/Notification';
 
 export const App = () => {
-  const [feedbacks, setFeedbacks] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  });
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   const leaveFeedback = feedback => {
-    setFeedbacks(prevState => {
-      const value = prevState[feedback];
-      return { ...prevState, [feedback]: value + 1 };
-    });
+    switch (feedback) {
+      case 'good':
+        setGood(prevState => prevState + 1);
+        break;
+      case 'neutral':
+        setNeutral(prevState => prevState + 1);
+        break;
+      case 'bad':
+        setBad(prevState => prevState + 1);
+        break;
+
+      default:
+        break;
+    }
   };
 
-  const { good, neutral, bad } = feedbacks;
+  const feedbacks = { good, neutral, bad };
 
   const total = good + neutral + bad;
 
